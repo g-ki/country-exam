@@ -35,20 +35,37 @@ struct Graph {
   }
 };
 
+struct Set {
+  int items[N_SIZE];
+  Set() {
+    for (int i=0; i < N_SIZE; ++i) items[i] = false;
+  }
+
+  bool has(int key) { return items[key]; }
+
+  bool add(int key) {
+    if (!has(key))
+      return items[key] = true;
+    return false;
+  }
+};
 
 // for big graphs recursion could become too deep and return an error
-bool has_path(const Node* a, const Node* b) {
+bool has_path(const Node* a, const Node* b, Set& s) {
   if (a == b) return true;
 
+  s.add(a->value);
   for (int i = 0; i < a->size; ++i)
-    if (has_path(a->children[i], b))
-      return true;
+    if (s.add(a->children[i]->value))
+      if (has_path(a->children[i], b, s))
+        return true;
 
   return false;
 }
 
 inline bool has_some_path(const Node* a, const Node* b) {
-  return has_path(a, b) || has_path(b, a);
+  Set s1, s2;
+  return has_path(a, b, s1) || has_path(b, a, s2);
 }
 
 bool is_connected(const Graph& g) {
