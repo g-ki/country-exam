@@ -36,7 +36,7 @@ struct Graph {
 };
 
 struct Set {
-  int items[N_SIZE];
+  bool items[N_SIZE];
   Set() {
     for (int i=0; i < N_SIZE; ++i) items[i] = false;
   }
