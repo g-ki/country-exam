@@ -76,6 +76,8 @@ class Stack {
     return *this;
   }
 
+  ~Stack() { drop(); }
+
   bool empty() const { return top_ == nullptr; }
 
   void push(const T& x) {
