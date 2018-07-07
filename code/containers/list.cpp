@@ -21,7 +21,7 @@ class List {
   Node<T>* back_;
 
   void copy(const List& other) {
-    for (auto i = other.begin(); i != other.end(); i = i->next)
+    for (auto i = other.begin(); i != nullptr; i = i->next)
       push_back(i->data);
   }
 
