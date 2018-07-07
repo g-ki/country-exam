@@ -151,11 +151,6 @@ class BinTree {
 
   bool remove(const T& x) {
     if (empty()) return false;
-    if (root_->leaf() && root_->data == x) {
-      delete root_;
-      root_ = nullptr;
-      return true;
-    }
     return Node<T>::remove(root_, x);
   }
 
