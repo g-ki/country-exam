@@ -9,27 +9,30 @@ class StaticTree {
   unsigned top_;
 
   public:
-  StaticTree() : top_(-1) {}
+  StaticTree() : top_(-1) {
+    for(int i = 0; i < MAX_TREE; ++i) {
+      left_child_[i] = -1;
+      right_child_[i] = -1;
+    }
+  }
 
   bool empty() const { return top_ == -1; }
 
   void insert_left(int index, const T& x) {
     if (top_ >= MAX_TREE) return;
     nodes_[++top_] = x;
-    if (index >= 0) left_child_[index] = top_ - 1;
+    if (index >= 0) left_child_[index] = top_;
   }
 
   void insert_right(int index, const T& x) {
     if (top_ >= MAX_TREE) return;
     nodes_[++top_] = x;
-    if (index >= 0) right_child_[index] = top_ - 1;
+    if (index >= 0) right_child_[index] = top_;
   }
 
   T& value(int id) const { return nodes_[id]; }
   int left(int id) const { return left_child_[id]; }
   int right(int id) const { return right_child_ [id]; }
-
-  // TODO
 };
 
 template<typename T>
